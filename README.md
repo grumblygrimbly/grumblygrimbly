@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @grumblygrimbly
 - 👀 I’m interested in ... Computers and Study; as well as television.
-- 🌱 I’m currently learning ... to code (or program)
+- 🌱 I’m currently learning ... scripting and code (or program).
 - 💞️ I’m looking to collaborate on ... writing and programming.
 - 📫 How to reach me ... eMail Grimbly@writeme.com
 - 😄 Pronouns: ... You decide.
