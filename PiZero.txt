@@ -7,3 +7,50 @@ Camera, Morse Code LED, ASCII LED Transmit.
 1. Legacy RaspBi coding works the camera.
 2. Python code flashes Morse code to the LED 
 3. A Python program translates and transmits ASCII implementation on 8 LED's.
+
+Python file then 
+ASCII_3.py
+
+import RPi.GPIO as GPIO
+import time
+
+# Define the GPIO pins for the eight LEDs (adjust these pins as needed)
+led_pins = [5, 6, 13, 19, 26, 16, 20, 21]
+
+# Function to set up GPIO
+def setup_gpio():
+    GPIO.setmode(GPIO.BCM)
+    for pin in led_pins:
+        GPIO.setup(pin, GPIO.OUT)
+        GPIO.output(pin, GPIO.LOW)
+
+# Function to transmit an ASCII code using the eight LEDs
+def transmit_ascii_code(ascii_code):
+    binary_code = format(ascii_code, '08b')  # Convert ASCII code to 8-bit binary
+    for i, pin in enumerate(led_pins):
+        if binary_code[i] == '1':
+            GPIO.output(pin, GPIO.HIGH)
+        else:
+            GPIO.output(pin, GPIO.LOW)
+
+# Function to transmit text from a file as ASCII codes
+def transmit_text_from_file(file_path):
+    setup_gpio()
+    try:
+        with open(file_path, 'r') as file:
+            text = file.read()
+            for char in text:
+                ascii_code = ord(char)
+                transmit_ascii_code(ascii_code)
+                time.sleep(1)  # Delay for 1 second
+                for pin in led_pins:
+                    GPIO.output(pin, GPIO.LOW)
+                time.sleep(.25)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        GPIO.cleanup()
+
+if __name__ == "__main__":
+    file_path = "message.txt"  # Change this to the path of your text file
+    transmit_text_from_file(file_path)
