@@ -1,0 +1,9 @@
+First Project for me. I could add photos.
+
+Raspberry Pi Zero 2WH 
+3 projects on the one device
+Camera, Morse Code LED, ASCII LED Transmit.
+
+1. Legacy RaspBi coding works the camera.
+2. Python code flashes Morse code to the LED 
+3. A Python program translates and transmits ASCII implementation on 8 LED's.
