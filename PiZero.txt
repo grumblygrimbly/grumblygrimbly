@@ -8,7 +8,7 @@ Camera, Morse Code LED, ASCII LED Transmit.
 2. Python code flashes Morse code to the LED 
 3. A Python program translates and transmits ASCII implementation on 8 LED's.
 
-Python file then, (mostly written by MS Edge AI and ChatGPT on Google) - ASCII_3.py
+Python file then, (mostly written by MS Edge AI and ChatGPT on Chromium-Browser) - ASCII_3.py
 
 
 import RPi.GPIO as GPIO
