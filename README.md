@@ -4,7 +4,7 @@
 - 💞️ I’m looking to collaborate on ... writing and programming.
 - 📫 How to reach me ... eMail Grimbly@writeme.com
 - 😄 Pronouns: ... You decide.
-- ⚡ Fun fact: ... ---- Their are fun facts.
+- ⚡ Fun fact: ... ---- They're fun facts.
 
 <!---
 grumblygrimbly/grumblygrimbly is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
