@@ -54,3 +54,61 @@ def transmit_text_from_file(file_path):
 if __name__ == "__main__":
     file_path = "message.txt"  # Change this to the path of your text file
     transmit_text_from_file(file_path)
+
+
+
+Second Program file then. Morse Code to one LED. - Morse_3.py
+
+import RPi.GPIO as GPIO
+import time
+
+# Define the GPIO pin where the LED is connected
+led_pin = 17
+
+# Define the Morse Code dictionary
+morse_code_dict = {
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
+    'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+    'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---',
+    'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+    'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--',
+    'Z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--',
+    '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+    '9': '----.', ' ': ' '
+}
+
+# Function to transmit a single Morse Code character
+def transmit_character(char):
+    if char == ' ':
+        time.sleep(3)  # 3 units of time for word gap
+    else:
+        for symbol in morse_code_dict[char.upper()]:
+            if symbol == '.':
+                GPIO.output(led_pin, GPIO.HIGH)
+                time.sleep(1)  # 1 unit of time for dot
+                GPIO.output(led_pin, GPIO.LOW)
+                time.sleep(1)  # 1 unit of time for gap between dots and dashes
+            elif symbol == '-':
+                GPIO.output(led_pin, GPIO.HIGH)
+                time.sleep(3)  # 3 units of time for dash
+                GPIO.output(led_pin, GPIO.LOW)
+                time.sleep(1)  # 1 unit of time for gap between dots and dashes
+    time.sleep(2)  # 2 units of time for gap between characters
+
+# Function to transmit a Morse Code message
+def transmit_message(message):
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(led_pin, GPIO.OUT)
+    
+    for char in message:
+        transmit_character(char)
+
+    GPIO.cleanup()
+
+if __name__ == "__main__":
+    message_to_transmit = "HELLO TO THE WHOLE WORLD"  # Change this to your desired message
+    transmit_message(message_to_transmit)
+
+
+
+
