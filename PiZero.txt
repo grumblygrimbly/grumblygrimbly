@@ -110,5 +110,9 @@ if __name__ == "__main__":
     transmit_message(message_to_transmit)
 
 
+Third bit of the stated intent.
+With the PiCam it's easy enough to take a photos and save it to disk with -
+
+raspistill -o filename.jpg
 
 
