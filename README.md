@@ -7,7 +7,7 @@
 - ⚡ Fun fact: ... ---- They're fun facts.
 
 The way I see it -
-The problem is the same as it has always been that of Cross-platform compatibility and industry standardization. 
+The problem is the same as it has always been that of Cross-platform compatibility and industry-wide standardization. 
 
 <!---
 grumblygrimbly/grumblygrimbly is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
