@@ -6,6 +6,9 @@
 - 😄 Pronouns: ... You decide.
 - ⚡ Fun fact: ... ---- They're fun facts.
 
+The way I see it -
+The problem is the same as it has always been that of Cross-platform standardization.
+
 <!---
 grumblygrimbly/grumblygrimbly is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
