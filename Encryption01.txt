@@ -1,0 +1,37 @@
+This is my SuperSecret ASCII crypt facility. 
+Encryption is not something I've spent much time on, but what I have here might suffice for any envisaged Encryption requirement.
+Following the tradition of having an INPUT and an OUTPUT file, my AES implementation via Openssl does the job well enough I am tempted to believe although the physical security of the stored and/or transmitted Data of course is as important as the complex scrambling of the messages and text.
+Not going in for a double or triple encode, the Bash script saves to file straight away without the facility to just display decrypted material to screen. I did have it doing this, but due to lack of use or impetus their's no implementation in the prog. 
+I don't, if ever compile progs., because of lack of necessity and also the freqency of alterations just makes it an annoying extra step.
+Clearly no room for any error is accounted for here and the fact is the user is trusted in every way making this a non-starter for general implementation.
+
+bash script files then.
+
+
+Ncrypt.sh
+
+#!/bin/bash
+clear
+echo
+echo "File to Encrypt   - " 
+read C1
+echo "Name of Crypted file - " 
+read C2
+openssl aes-256-cbc -e -in $C1 -out $C2 -k "Literacy12345" -nosalt -a
+echo
+cat $C2
+
+
+Dcrypt.sh
+
+#!/bin/bash
+clear
+echo
+echo "File to Decrypt   - "
+read D1
+echo "Filename for Text -"
+read D2
+openssl aes-256-cbc -d -in $D1 -out $D2 -k "Literacy12345" -nosalt -a
+echo 
+cat $D2
+
