@@ -9,6 +9,9 @@
 The way I see it -
 The problem is the same as it has always been that of Cross-platform compatibility and industry-wide standardization. 
 
+New World of Tech. -
+I'm going back to my original view, If I were to learn the ins and outs of any particular OS distribution and then fully customize it the main option would be Free or Open BSD rather than Arch. 
+
 <!---
 grumblygrimbly/grumblygrimbly is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
