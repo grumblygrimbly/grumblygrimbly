@@ -1,0 +1,147 @@
+OLED 0.91" Display
+ESP32 WROOM Dev Board
+
+A couple of buttons make a handy way for me to count upto 10 minutes and down from 30 before giving a double flash.
+The 30 minute countdown will reset on button press when idle, but the countup to 10 mins. does not. A button press resets the count when it's busy timing.
+Arduino IDE used for Compiling and Upload, here is the code written by Microsoft Co-Pilot AI with 4 or five adjust prompts.
+
+
+
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+// OLED display width and height
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 32
+
+// Define the OLED reset pin
+#define OLED_RESET    -1 // Use -1 if there is no reset pin
+
+// Define button pins
+#define BUTTON_PIN_RESET 4 // GPIO pin for reset button
+#define BUTTON_PIN_COUNTUP 5 // GPIO pin for count-up button
+
+// Create an instance of the SSD1306 display object
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+// Countdown variables
+int countdownMinutes = 30;
+int countdownSeconds = 0;
+bool countdownComplete = false;
+bool countUpActive = false;
+int countUpMinutes = 0;
+int countUpSeconds = 0;
+
+void setup() {
+  // Initialize the display with I2C address 0x3C
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;); // Don't proceed, loop forever
+  }
+
+  // Initialize button pins
+  pinMode(BUTTON_PIN_RESET, INPUT_PULLUP);
+  pinMode(BUTTON_PIN_COUNTUP, INPUT_PULLUP);
+
+  // Clear the buffer
+  display.clearDisplay();
+  display.setTextSize(4); // Larger text size to fill the screen
+  display.setTextColor(SSD1306_WHITE);
+}
+
+void loop() {
+  // Check if the reset button is pressed
+  if (digitalRead(BUTTON_PIN_RESET) == LOW) {
+    countdownMinutes = 30;
+    countdownSeconds = 0;
+    countdownComplete = false;
+    countUpActive = false;
+    display.setTextSize(4); // Ensure text size is reset
+    delay(200); // Debounce delay
+  }
+
+  // Check if the count-up button is pressed
+  if (digitalRead(BUTTON_PIN_COUNTUP) == LOW) {
+    countUpActive = true;
+    countdownMinutes = 0;
+    countdownSeconds = 0;
+    countUpMinutes = 0;
+    countUpSeconds = 0;
+    display.setTextSize(4); // Ensure text size is reset
+    delay(200); // Debounce delay
+  }
+
+  // Update and display the countdown or count-up timer
+  display.clearDisplay();
+  display.setCursor(0, 0);
+
+  if (countUpActive) {
+    char timeStr[6];
+    sprintf(timeStr, "%02d:%02d", countUpMinutes, countUpSeconds);
+    display.print(timeStr);
+
+    display.display();
+
+    if (countUpMinutes == 10 && countUpSeconds == 0) {
+      countUpActive = false;
+      countdownComplete = true;
+    } else {
+      delay(1000);
+      if (countUpSeconds == 59) {
+        countUpMinutes++;
+        countUpSeconds = 0;
+      } else {
+        countUpSeconds++;
+      }
+    }
+  } else {
+    char timeStr[6];
+    sprintf(timeStr, "%02d:%02d", countdownMinutes, countdownSeconds);
+    display.print(timeStr);
+
+    display.display();
+
+    if (countdownMinutes == 0 && countdownSeconds == 0) {
+      countdownComplete = true;
+    } else {
+      delay(1000);
+      if (countdownSeconds == 0) {
+        if (countdownMinutes > 0) {
+          countdownMinutes--;
+          countdownSeconds = 59;
+        }
+      } else {
+        countdownSeconds--;
+      }
+    }
+  }
+
+  // Flash the screen twice when countdown or count-up is complete
+  if (countdownComplete) {
+    for (int i = 0; i < 2; i++) {
+      display.clearDisplay();
+      display.display();
+      delay(250);
+      display.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SSD1306_WHITE);
+      display.display();
+      delay(250);
+    }
+
+    // Display "TimeCount" after flashing
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setCursor(20, 8);
+    display.print("TimeCount");
+    display.display();
+
+    // Ensure the countdown can restart on button press
+    while (digitalRead(BUTTON_PIN_RESET) == HIGH) {
+      delay(100); // Wait for button press
+    }
+    delay(200); // Debounce delay
+    countdownMinutes = 30;
+    countdownSeconds = 0;
+    display.setTextSize(4); // Ensure text size is set for the next countdown
+    countdownComplete = false;
+  }
