@@ -10,7 +10,7 @@
 The way I see it -
 The problem is the same as it has always been that of Cross-platform compatibility and industry-wide standardization. 
 
-New World of Tech. -
+New World of Tech. - 
 I'm going back to my original view. If I were to learn the ins and outs of any particular OS distribution and then fully customize it my choice would be BSD.
 
 <!---
