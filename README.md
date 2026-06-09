@@ -1,4 +1,4 @@
-- 👋 Hello to you my name is @grumblygrimbly
+- 👋 Hello to you my name is Grimble.
 - 👀 I’m interested in ... Computers and Study; as well as television.
 - 🌱 I’m currently learning ... scripting and code (or program).
 - 💞️ I’m looking to collaborate on ... scripting, writing and programming.
